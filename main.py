@@ -166,7 +166,7 @@ def generate_video_segment(segment: int, scene: Scene):
         Tools = [WolframStepsWrapper()]
         answer_parser = PydanticOutputParser(pydantic_object=Answer)
         prefix = f"Use Wolfram Alpha to solve the given question and return the steps as well as the answer. You MUST respond with this output format: {answer_parser.get_format_instructions()}"
-        agent = initialize_agent(Tools, ChatOpenAI(model="gpt-3.5-turbo-0125", api_key="sk-proj-AcP22gbLTA81AM7fFjP2T3BlbkFJOXs4Pc46nlQmzgIx3s6o"), agent=AgentType.OPENAI_FUNCTIONS, verbose=True, agent_kwargs={
+        agent = initialize_agent(Tools, ChatOpenAI(model="gpt-3.5-turbo-0125"), agent=AgentType.OPENAI_FUNCTIONS, verbose=True, agent_kwargs={
             "system_message": SystemMessage(content=prefix)
         })
         wolfram_answer = answer_parser.parse(agent.run(scene.problem))
